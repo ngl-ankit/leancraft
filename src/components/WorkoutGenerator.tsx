@@ -8,7 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Dumbbell, TrendingUp, Home, Building2, Plus, History, ChevronDown, ChevronUp, CheckCircle2, Flame, Star, Target, Zap, RefreshCw, Clock, Heart } from 'lucide-react';
+import { Dumbbell, TrendingUp, Home, Building2, Plus, History, ChevronDown, ChevronUp, CheckCircle2, Flame, Star, Target, Zap, RefreshCw, Clock, Heart, Sparkles } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { toast } from 'sonner';
 
