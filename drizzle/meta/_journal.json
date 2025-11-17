@@ -1,0 +1,20 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1763376908606,
+      "tag": "0000_purple_inhumans",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1763380138498,
+      "tag": "0001_ancient_namor",
+      "breakpoints": true
+    }
+  ]
+}
