@@ -1,32 +1,63 @@
-First, run the development server:
+# LeanCraft - AI-Powered Fitness Platform
+
+A Next.js 15 fitness platform with diet planning, workout generation, progress tracking, and an AI coach — backed by a Turso (libSQL) database via Drizzle ORM.
+
+## Tech Stack
+- Next.js 15 (App Router) + React 19 + TypeScript
+- Tailwind CSS 4
+- Drizzle ORM + Turso (libSQL)
+- bcrypt for password hashing
+
+## Local Development
+
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+2. Copy `.env.example` to `.env` and fill in your Turso credentials:
+   ```bash
+   cp .env.example .env
+   ```
+3. Push the schema to your database (first time / after schema changes):
+   ```bash
+   npm run db:push
+   ```
+4. Run the dev server:
+   ```bash
+   npm run dev
+   ```
+   Open [http://localhost:3000](http://localhost:3000).
+
+## Production Build
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run build
+npm run start
 ```
+The start script binds to `process.env.PORT` (falls back to 3000), which is required for platforms like Render that assign a dynamic port.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Environment Variables
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Variable | Required | Description |
+|---|---|---|
+| `TURSO_CONNECTION_URL` | Yes | Turso/libSQL database connection URL (e.g. `libsql://<db>.turso.io`) |
+| `TURSO_AUTH_TOKEN` | Yes | Turso database auth token |
+| `PORT` | No (set by Render automatically) | Port the server listens on |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+⚠️ Never commit your real `.env` file — it is git-ignored. Use `.env.example` as a template.
 
-## Learn More
+## Deploying to Render
 
-To learn more about Next.js, take a look at the following resources:
+This app is a standard Next.js Node web service (not static export), so deploy it as a **Web Service**.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Root Directory**: `.` (repo root)
+- **Build Command**: `npm install && npm run build`
+- **Start Command**: `npm run start`
+- **Environment**: Node
+- **Node Version**: 18.18+ (set via `engines` in `package.json`, or add `NODE_VERSION=20` env var on Render)
+- **Required Environment Variables**:
+  - `TURSO_CONNECTION_URL`
+  - `TURSO_AUTH_TOKEN`
+- Render automatically provides `PORT`; the start script already respects it.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+If you need to apply the Drizzle schema to a fresh Turso database, run `npm run db:push` locally (or via a Render Shell) with the same `TURSO_*` env vars set.
